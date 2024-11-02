@@ -65,9 +65,5 @@ class Criatura {
         $this->weapon = $weapon;
     }
 
-    public function eqals($otraPersona) {
-        return $this->nombre === $otraPersona->nombre && $this->edad === $otraPersona->edad;
-    }
-
 }
 
