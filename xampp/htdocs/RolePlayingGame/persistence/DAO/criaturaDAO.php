@@ -22,5 +22,26 @@ class criaturaDAO{
         }
         return $criaturas;
     }
+    
+    public function selectById($id) {
+        $query = "SELECT NAME, DESCRIPTION, AVATAR, ATTACKPOWER, LIFELEVEL, WEAPON FROM " . criaturaDAO::$USER_TABLE . " WHERE IDCRIATURE=?";
+        $stmt = mysqli_prepare($this->conn, $query);
+        mysqli_stmt_bind_param($stmt, 'i', $id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_bind_result($stmt, $id, $nombre, $descripcion, $avatar, $attakPower, $lifelevel, $weapon);
+
+        $criatura = new Criatura();
+        while (mysqli_stmt_fetch($stmt)) {
+            $criatura->setId($id);
+            $criatura->setNombre($nombre);
+            $criatura->setDescripcion($descripcion);
+            $criatura->setAvatar($avatar);
+            $criatura->setAttackpower($attakPower);
+            $criatura->setLifelevel($lifelevel);
+            $criatura->setWeapon($weapon);
+        }
+
+        return $criatura;
+    }
 }
 
