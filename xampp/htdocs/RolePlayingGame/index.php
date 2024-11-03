@@ -10,7 +10,9 @@
 <body>
     <!-- Header -->
     <?php
+    $creando=false;
     require_once(dirname(__FILE__) . '/templates/header.php');
+    require_once(dirname(__FILE__) . '/persistence/DAO/criaturaDAO.php');
     ?>
     <!-- Main content -->
     <div class="container mt-4">
@@ -24,46 +26,39 @@
                 <p>La aventura comienza aquí, en tu navegador</p>
                 <a href="play.php" class="btn btn-primary">Juega ahora!</a>
             </div>
-        </div>
+        
 
         <!-- Creatures Section -->
-        <div class="row mt-5">
+        
             <?php
-            // Sample data for creatures
-            $creatures = [
-                [
-                    "name" => "Nombre criatura 1",
-                    "description" => "Descripción de la criatura 1. Por ejemplo: Los poderosos Centinelas son la primera línea de defensa del Sacro Imperio. Son voluntarios que han demostrado su lealtad al Emperador y su devoción a Elrath. Han jurado proteger a sus hermanos de armas con su pesado escudo y, si es necesario, con sus vidas. Para su protección personal, confían completamente en su fe.",
-                    "image" => "./assests/img/personaje.webp"
-                ],
-                [
-                    "name" => "Nombre criatura 2",
-                    "description" => "Descripción de la criatura 2.",
-                    "image" => "./assests/img/personaje.webp"
-                ],
-                [
-                    "name" => "Nombre criatura 3",
-                    "description" => "Descripción de la criatura 3.",
-                    "image" => "./assests/img/personaje.webp"
-                ]
-            ];
-
+            $criaturaDAO = new criaturaDAO();
+            $creatures = $criaturaDAO->selectAll();
+            $contador=0;
             foreach ($creatures as $creature) {
+                $contador+=1;
+                if ($contador==1){
+                    echo '</div>';
+                    echo '<div class="row mt-5">';
+                }
                 echo '
                 <div class="col-md-4 mb-4">
                     <div class="card h-100">
-                        <img src="'.$creature['image'].'" class="card-img" alt="'.$creature['name'].'">
+                        <img src="'.$creature->getAvatar().'" class="card-img" alt="'.$creature->getNombre().'">
                         <div class="card-body">
-                            <h5 class="card-title">'.$creature['name'].'</h5>
-                            <p class="card-text">'.$creature['description'].'</p>
+                            <h5 class="card-title">'. $creature->getNombre() .'</h5>
+                            <p class="card-text">'.$creature->getDescripcion().'</p>
                             <div class="btn-group">
-                                <a href="more_info.php" class="btn btn-light">Más información</a>
-                                <a href="edit.php" class="btn btn-success">Modificar</a>
-                                <a href="delete.php" class="btn btn-danger">Exterminar</a>
+                                <a href="more_info.php?id=' . $creature->getId().'" class="btn btn-light" >Más información</a> 
+                                <a href="./app/private/editarCriatura.php?id=' . $creature->getId().'" class="btn btn-success">Modificar</a>
+                                <a href="./app/private/eliminarCriatura.php?id=' . $creature->getId().'" class="btn btn-danger">Exterminar</a>
                             </div>
                         </div>
                     </div>
                 </div>';
+                if ($contador%3==0){
+                    echo '</div>';
+                    echo '<div class="row mt-5">';
+                }
             }
             ?>
         </div>
