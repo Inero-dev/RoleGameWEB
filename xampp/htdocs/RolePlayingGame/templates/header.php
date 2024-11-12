@@ -8,7 +8,24 @@
             else{
                 echo '<h1>Creando una Criatura';
             }
+            require_once(dirname(__FILE__) . '/../utils/sessionHealper.php');
+            sessionHealper::startSessionIfNotStarted();
+            require_once(dirname(__FILE__) . '/../app/controllers/sessionController.php');
+            if (sessionHealper::loggedIn()== false){
+                echo "
+                    <form class='d-flex ms-auto' method='POST'>
+                        <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' name='nombreUsuario'>
+                        <input type='password' class='form-control me-2' type='search' placeholder='Search' aria-label='Search' name='contraseña' value='Contraseña33'>
+                        <button class='btn btn-outline-success' type='submit' name='btnAccion' value='iniciar'>Iniciar sesión</button>
+                    </form>";
+            }
+            else{
+                echo "<form class='d-flex ms-auto' method='POST'><button class='btn btn-outline-success' type='submit' name='btnAccion' value='cerrar'>Cerrar Sesión</button></form>";
+            }
+            
         ?>
+        
+        
         
 
         
