@@ -1,7 +1,7 @@
 <?php
 
 require_once(dirname(__FILE__) . '\..\..\persistence\DAO\criaturaDAO.php');
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset( $_POST['accion'])) {
     $criaturaNew = new Criatura();
     $criaturaDAO = new criaturaDAO();
     $nombre = $_POST['inNombre'];
@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     else if ($paginaInicial == 'eliminar'){
         $criaturaDAO->delete($id);
     }
+    header("Location: ../../index.php");
 }
 
 

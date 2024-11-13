@@ -17,5 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btnAccion'])) {
     else if ($_POST['btnAccion'] == 'cerrar'){
         sessionHealper::destroySession();
         echo "<p class='d-flex ms-auto' > Hasta prontoo!! </p>";
+        header("Location: ../../index.php");
     }
 }

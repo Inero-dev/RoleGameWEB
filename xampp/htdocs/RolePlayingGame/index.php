@@ -51,7 +51,7 @@
                     if (sessionHealper::loggedIn() == true) {
                         echo '
                             <div class="btn-group">
-                                <a href="more_info.php?id=' . $creature->getId() . '" class="btn btn-light" >Más información</a> 
+                                <a href="./app/private/detalles.php?id=' . $creature->getId() . '" class="btn btn-light" >Más información</a> 
                                 <a href="./app/private/editarCriatura.php?id=' . $creature->getId() . '" class="btn btn-success">Modificar</a>
                                 <a href="./app/private/eliminarCriatura.php?id=' . $creature->getId() . '" class="btn btn-danger">Exterminar</a>
                             </div>';
