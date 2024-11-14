@@ -1,0 +1,29 @@
+Diagrama de Componentes
+
+Controladores (controllers)
+
+Llaman a los métodos de los Modelos y DAO según las solicitudes del usuario.
+Redirigen a las vistas en private o a plantillas en templates.
+
+
+Modelos (models)
+
+Definen la lógica y la estructura de las entidades (como "Criatura").
+Se comunican con los DAOs para realizar operaciones en la base de datos.
+
+
+DAO y Persistencia (DAO y Persistence)
+
+Los DAOs se comunican directamente con la base de datos para ejecutar operaciones CRUD.
+PersistentManager.php coordina las conexiones y operaciones de transacción en la base de datos.
+
+
+Vistas privadas (private)
+
+Solo accesibles después de autenticarse, controladas por sessionHelper.php.
+Interfaz de usuario para las operaciones con criaturas (crear, editar, eliminar, ver detalles).
+
+
+Recursos (assets)
+
+Proveen estilos y recursos visuales para mejorar la experiencia de usuario.
